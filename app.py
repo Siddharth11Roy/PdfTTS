@@ -19,10 +19,8 @@ import pyttsx3
 import os
 
 def extract_text_from_pdf(pdf_file):
-    doc = fitz.open(streamlit_uploaded_file=pdf_file)
-    text = ""
-    for page in doc:
-        text += page.get_text("text") + "\n"
+    with fitz.open(stream=pdf_file.read(), filetype="pdf") as doc:
+        text = "\n".join(page.get_text("text") for page in doc)
     return text
 
 def text_to_speech(text):
