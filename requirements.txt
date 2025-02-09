@@ -1,3 +1,4 @@
 streamlit
 pymupdf
 pyttsx3
+gtts
