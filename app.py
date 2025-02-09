@@ -7,11 +7,11 @@ Original file is located at
     https://colab.research.google.com/drive/1lPVx9wSF3IkWOXgzhIb-DfbTOZBF14_6
 """
 
-!pip install streamlit
+# !pip install streamlit
 
-!pip install pymupdf
+# !pip install pymupdf
 
-!pip install pyttsx3
+# !pip install pyttsx3
 
 import streamlit as st
 import fitz
