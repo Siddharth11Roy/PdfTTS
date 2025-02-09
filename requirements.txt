@@ -3,4 +3,4 @@ pymupdf
 pyttsx3
 gtts
 pydub
-ffmpeg
+ffmpeg-python
