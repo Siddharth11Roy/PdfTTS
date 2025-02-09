@@ -113,7 +113,12 @@ import streamlit as st
 import fitz  # PyMuPDF for extracting text from PDFs
 from gtts import gTTS
 from pydub import AudioSegment
+from pydub.playback import play
 import os
+
+AudioSegment.converter = "ffmpeg"
+AudioSegment.ffmpeg = "ffmpeg"
+AudioSegment.ffprobe = "ffprobe"
 
 # Function to extract text from PDF
 def extract_text_from_pdf(pdf_file):
