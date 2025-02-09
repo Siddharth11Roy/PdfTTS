@@ -4,3 +4,4 @@ pyttsx3
 gtts
 pydub
 ffmpeg-python
+ffprobe
