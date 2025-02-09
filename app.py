@@ -16,6 +16,7 @@ Original file is located at
 import streamlit as st
 import fitz
 import pyttsx3
+from gtts import gTTS
 import os
 
 def extract_text_from_pdf(pdf_file):
@@ -24,9 +25,8 @@ def extract_text_from_pdf(pdf_file):
     return text
 
 def text_to_speech(text):
-    engine = pyttsx3.init()
-    engine.save_to_file(text, "output_audio.mp3")  # Save as audio file
-    engine.runAndWait()
+    tts = gTTS(text=text, lang="en")  # Convert text to speech
+    tts.save("output_audio.mp3")  # Save as MP3 file
 
 st.title("PDF to Speech Converter")
 
