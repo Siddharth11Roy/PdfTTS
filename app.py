@@ -32,10 +32,26 @@ st.title("PDF to Speech Converter")
 
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 
+# if uploaded_file is not None:
+#     text = extract_text_from_pdf(uploaded_file)
+#     st.text_area("Extracted Text", text, height=300)
+
+#     if st.button("Convert to Speech"):
+#         text_to_speech(text)
+#         st.audio("output_audio.mp3", format="audio/mp3", start_time=0)
+
+
+# Language Selection
+lang_map = {"English": "en", "Hindi": "hi", "French": "fr", "Spanish": "es"}
+lang_choice = st.selectbox("Select Language", list(lang_map.keys()))
+
+# Speech Speed Selection
+speed_choice = st.radio("Speech Speed", ["Normal", "Slow"])
+
 if uploaded_file is not None:
     text = extract_text_from_pdf(uploaded_file)
     st.text_area("Extracted Text", text, height=300)
 
     if st.button("Convert to Speech"):
-        text_to_speech(text)
+        text_to_speech(text, lang_map[lang_choice], speed_choice)
         st.audio("output_audio.mp3", format="audio/mp3", start_time=0)
