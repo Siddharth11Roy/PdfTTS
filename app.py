@@ -132,7 +132,7 @@ lang_map = {"English": "en", "Hindi": "hi", "French": "fr", "Spanish": "es"}
 lang_choice = st.selectbox("Select Language", list(lang_map.keys()))
 
 # Speech Speed Selection (1.0x to 2.5x)
-speed_choice = st.slider("Speech Speed", min_value=0.5, max_value=2.5, value=1.0, step=0.25)
+speed_choice = st.slider("Speech Speed", min_value=1, max_value=1.5, value=1.0, step=0.25)
 
 if uploaded_file is not None:
     text = extract_text_from_pdf(uploaded_file)
