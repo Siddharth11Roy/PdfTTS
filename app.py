@@ -53,6 +53,9 @@ def text_to_speech(text, lang, speed_multiplier):
     except Exception as e:
         st.error(f"Error in text-to-speech conversion: {e}")
 
+
+st.set_page_config(page_title="PDT-TEXT-TO-SPEECH", page_icon="🔊", layout="wide")
+
 # Streamlit UI
 st.title("📄 PDF to Speech Converter 🔊")
 
