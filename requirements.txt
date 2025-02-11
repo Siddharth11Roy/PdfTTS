@@ -3,3 +3,5 @@ pymupdf
 pyttsx3
 gtts
 pydub
+streamlit-lottie
+requests
