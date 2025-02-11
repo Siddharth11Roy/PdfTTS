@@ -44,23 +44,69 @@ def extract_text_from_pdf(pdf_file):
         return ""
 
 # Function to convert text to speech and adjust speed
+# def text_to_speech(text, lang, speed_multiplier):
+#     if not text:
+#         st.error("No text extracted from the PDF. Please upload a valid PDF with selectable text.")
+#         return
+
+#     try:
+#         # Generate speech at normal speed
+#         tts = gTTS(text=text, lang=lang)
+#         tts.save("temp_audio.mp3")
+
+#         # Load the generated audio and adjust speed
+#         audio = AudioSegment.from_file("temp_audio.mp3", format="mp3")
+#         new_audio = audio.speedup(playback_speed=speed_multiplier)
+#         new_audio.export("output_audio.mp3", format="mp3")
+
+#     except Exception as e:
+#         st.error(f"Error in text-to-speech conversion: {e}")
+
 def text_to_speech(text, lang, speed_multiplier):
     if not text:
-        st.error("No text extracted from the PDF. Please upload a valid PDF with selectable text.")
+        st.error("No text extracted from the PDF.")
         return
 
     try:
-        # Generate speech at normal speed
+        st.info("Generating speech, please wait...")
         tts = gTTS(text=text, lang=lang)
         tts.save("temp_audio.mp3")
 
-        # Load the generated audio and adjust speed
+        # Debug: Check if the file exists
+        if not os.path.exists("temp_audio.mp3"):
+            st.error("Error: temp_audio.mp3 was not created.")
+            return
+
+        # Play the original audio to check if it's valid
+        st.audio("temp_audio.mp3", format="audio/mp3")
+
+        # Load and modify speed
         audio = AudioSegment.from_file("temp_audio.mp3", format="mp3")
+
+        # Debug: Print duration before modification
+        st.write(f"Original Audio Duration: {len(audio) / 1000} seconds")
+
+        # Apply speed modification only if audio has valid duration
+        if len(audio) == 0:
+            st.error("Generated audio is empty. Possible issue with gTTS output.")
+            return
+
         new_audio = audio.speedup(playback_speed=speed_multiplier)
         new_audio.export("output_audio.mp3", format="mp3")
 
+        # Debug: Print duration after modification
+        final_audio = AudioSegment.from_file("output_audio.mp3", format="mp3")
+        st.write(f"Final Audio Duration: {len(final_audio) / 1000} seconds")
+
+        if os.path.exists("output_audio.mp3"):
+            st.success("Speech generated successfully!")
+            st.audio("output_audio.mp3", format="audio/mp3")
+        else:
+            st.error("Speech file was not created.")
+
     except Exception as e:
         st.error(f"Error in text-to-speech conversion: {e}")
+
 
 
 st.set_page_config(page_title="PDT-TEXT-TO-SPEECH", page_icon="🔊", layout="wide")
