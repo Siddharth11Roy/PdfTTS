@@ -62,57 +62,7 @@ def extract_text_from_pdf(pdf_file):
 #     except Exception as e:
 #         st.error(f"Error in text-to-speech conversion: {e}")
 
-# def text_to_speech(text, lang, speed_multiplier):
-#     if not text:
-#         st.error("No text extracted from the PDF.")
-#         return
 
-#     try:
-#         st.info("Generating speech, please wait...")
-#         tts = gTTS(text=text, lang=lang)
-#         tts.save("temp_audio.mp3")
-
-#         # Debug: Check if the file exists
-#         if not os.path.exists("temp_audio.mp3"):
-#             st.error("Error: temp_audio.mp3 was not created.")
-#             return
-
-#         # Play the original audio to check if it's valid
-#         st.audio("temp_audio.mp3", format="audio/mp3")
-
-#         # Load and modify speed
-#         audio = AudioSegment.from_file("temp_audio.mp3", format="mp3")
-
-#         # Debug: Print duration before modification
-#         st.write(f"Original Audio Duration: {len(audio) / 1000} seconds")
-
-#         # Apply speed modification only if audio has valid duration
-#         if len(audio) == 0:
-#             st.error("Generated audio is empty. Possible issue with gTTS output.")
-#             return
-
-#         new_audio = audio.speedup(playback_speed=speed_multiplier)
-#         new_audio.export("output_audio.mp3", format="mp3")
-
-#         # Debug: Print duration after modification
-#         final_audio = AudioSegment.from_file("output_audio.mp3", format="mp3")
-#         st.write(f"Final Audio Duration: {len(final_audio) / 1000} seconds")
-
-#         if os.path.exists("output_audio.mp3"):
-#             st.success("Speech generated successfully!")
-#             st.audio("output_audio.mp3", format="audio/mp3")
-#         else:
-#             st.error("Speech file was not created.")
-
-#     except Exception as e:
-#         st.error(f"Error in text-to-speech conversion: {e}")
-
-def change_speed(audio, speed):
-    if speed == 1.0:
-        return audio  # No speed change needed
-
-    new_frame_rate = int(audio.frame_rate * speed)
-    return audio.set_frame_rate(new_frame_rate)
 
 def text_to_speech(text, lang, speed_multiplier):
     if not text:
@@ -124,26 +74,32 @@ def text_to_speech(text, lang, speed_multiplier):
         tts = gTTS(text=text, lang=lang)
         tts.save("temp_audio.mp3")
 
-        # Debug: Play raw audio to confirm it's correct
+        # Debug: Check if the file exists
+        if not os.path.exists("temp_audio.mp3"):
+            st.error("Error: temp_audio.mp3 was not created.")
+            return
+
+        # Play the original audio to check if it's valid
         st.audio("temp_audio.mp3", format="audio/mp3")
 
-        # Load the audio
+        # Load and modify speed
         audio = AudioSegment.from_file("temp_audio.mp3", format="mp3")
 
-        # Check if the generated audio is valid
+        # Debug: Print duration before modification
+        st.write(f"Original Audio Duration: {len(audio) / 1000} seconds")
+
+        # Apply speed modification only if audio has valid duration
         if len(audio) == 0:
             st.error("Generated audio is empty. Possible issue with gTTS output.")
             return
 
-        # Apply the fixed speed modification
-        new_audio = change_speed(audio, speed_multiplier)
+        new_audio = audio.speedup(playback_speed=speed_multiplier)
         new_audio.export("output_audio.mp3", format="mp3")
 
-        # Debug: Show duration before and after modification
-        st.write(f"Original Duration: {len(audio) / 1000} sec")
-        st.write(f"Final Duration: {len(new_audio) / 1000} sec")
+        # Debug: Print duration after modification
+        final_audio = AudioSegment.from_file("output_audio.mp3", format="mp3")
+        st.write(f"Final Audio Duration: {len(final_audio) / 1000} seconds")
 
-        # Play final audio
         if os.path.exists("output_audio.mp3"):
             st.success("Speech generated successfully!")
             st.audio("output_audio.mp3", format="audio/mp3")
@@ -152,6 +108,8 @@ def text_to_speech(text, lang, speed_multiplier):
 
     except Exception as e:
         st.error(f"Error in text-to-speech conversion: {e}")
+
+
 
 
 
