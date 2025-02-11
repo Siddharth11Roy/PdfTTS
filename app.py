@@ -65,10 +65,13 @@ def text_to_speech(text, lang, speed_multiplier):
 
 st.set_page_config(page_title="PDT-TEXT-TO-SPEECH", page_icon="🔊", layout="wide")
 
+col1, col2 = st.columns([1,1])
+
+
 # Streamlit UI
 st.title("📄 PDF to Speech Converter 🔊")
-
-st_lottie(load_lottieurl("https://lottie.host/55a1cac3-de09-453c-874b-50907e9195e2/tF3TSNDTga.json"), width=350, height=200)
+with col2:
+    st_lottie(load_lottieurl("https://lottie.host/55a1cac3-de09-453c-874b-50907e9195e2/tF3TSNDTga.json"), width=350, height=200)
 
 # File Upload
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
