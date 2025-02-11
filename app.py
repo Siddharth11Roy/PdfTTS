@@ -164,7 +164,7 @@ col1, col2 = st.columns([2,3])
 st.markdown('<h1 class="title">📄 PDF to Speech Converter 🔊</h1>', unsafe_allow_html=True)
 st.title("📄 PDF to Speech Converter 🔊")
 with col2:
-    st_lottie(load_lottieurl("https://lottie.host/55a1cac3-de09-453c-874b-50907e9195e2/tF3TSNDTga.json"), width=600, height=200)
+    st_lottie(load_lottieurl("https://lottie.host/55a1cac3-de09-453c-874b-50907e9195e2/tF3TSNDTga.json"), width=1200, height=200)
 
 # File Upload
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
