@@ -106,12 +106,56 @@ def text_to_speech(text, lang, speed_multiplier):
     except Exception as e:
         st.error(f"Error in text-to-speech conversion: {e}")
 
-
-
-
-
-
 st.set_page_config(page_title="PDT-TEXT-TO-SPEECH", page_icon="🔊", layout="wide")
+
+st.markdown(
+    """
+    <style>
+        body {
+            background: linear-gradient(to right, #2C2E43, #E03B8B);
+            color: white;
+        }
+        .stApp {
+            background-color: #1E1E2F;
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .css-1v0mbdj {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+        .title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #FFC107;
+        }
+        .stLottie {
+            background: none !important;
+            mix-blend-mode: screen; /* Optional: Blends with background */
+        }
+        .lottie-container {
+            width: 250px;
+            height: 150px;
+            background-color: #1E1E2F; /* Light gray */
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto; /* Center it */
+        }
+        .center-button {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
+
 
 col1, col2 = st.columns([2,3])
 
