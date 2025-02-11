@@ -19,6 +19,8 @@ from gtts import gTTS
 from pydub import AudioSegment
 from pydub.playback import play
 import os
+from streamlit_lottie import st_lottie
+import requests
 
 AudioSegment.converter = "ffmpeg"
 AudioSegment.ffmpeg = "ffmpeg"
