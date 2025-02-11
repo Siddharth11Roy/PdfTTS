@@ -91,7 +91,7 @@ def text_to_speech(text, lang, speed_multiplier):
         # Apply speed modification only if audio has valid duration
         if speed_multiplier == 1.0:
             st.success("Speech generated successfully at normal speed!")
-            st.audio("temp_audio.mp3", format="audio/mp3")
+            # st.audio("temp_audio.mp3", format="audio/mp3")
         else:
             new_audio = audio.speedup(playback_speed=speed_multiplier)
             new_audio.export("output_audio.mp3", format="mp3")
