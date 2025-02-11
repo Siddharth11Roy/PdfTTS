@@ -26,6 +26,13 @@ AudioSegment.converter = "ffmpeg"
 AudioSegment.ffmpeg = "ffmpeg"
 AudioSegment.ffprobe = "ffprobe"
 
+def load_lottieurl(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return None
+
 # Function to extract text from PDF
 def extract_text_from_pdf(pdf_file):
     try:
@@ -60,6 +67,8 @@ st.set_page_config(page_title="PDT-TEXT-TO-SPEECH", page_icon="🔊", layout="wi
 
 # Streamlit UI
 st.title("📄 PDF to Speech Converter 🔊")
+
+st_lottie(load_lottieurl("https://lottie.host/55a1cac3-de09-453c-874b-50907e9195e2/tF3TSNDTga.json"), width=350, height=200)
 
 # File Upload
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
