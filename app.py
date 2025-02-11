@@ -138,8 +138,8 @@ if uploaded_file is not None:
     if st.button("Convert to Speech"):
         text_to_speech(text, lang_map[lang_choice], speed_choice)
 
-        if os.path.exists("output_audio.mp3"):
-            st.audio("output_audio.mp3", format="audio/mp3", start_time=0)
+        # if os.path.exists("output_audio.mp3"):
+        #     st.audio("output_audio.mp3", format="audio/mp3", start_time=0)
 
 #######################################################################################################################
 
