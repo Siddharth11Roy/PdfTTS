@@ -1,7 +1,7 @@
 streamlit
 pymupdf
 pyttsx3
-gtts
+gtts==2.5.1
 pydub
 streamlit-lottie
 requests
