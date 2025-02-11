@@ -97,8 +97,8 @@ def text_to_speech(text, lang, speed_multiplier):
             new_audio.export("output_audio.mp3", format="mp3")
 
             # Debug: Print new duration
-            final_audio = AudioSegment.from_file("output_audio.mp3", format="mp3")
-            st.write(f"Final Audio Duration: {len(final_audio) / 1000} seconds")
+            # final_audio = AudioSegment.from_file("output_audio.mp3", format="mp3")
+            # st.write(f"Final Audio Duration: {len(final_audio) / 1000} seconds")
 
             st.success("Speech generated successfully with speed change!")
             st.audio("output_audio.mp3", format="audio/mp3")
