@@ -89,22 +89,19 @@ def text_to_speech(text, lang, speed_multiplier):
         st.write(f"Original Audio Duration: {len(audio) / 1000} seconds")
 
         # Apply speed modification only if audio has valid duration
-        if len(audio) == 0:
-            st.error("Generated audio is empty. Possible issue with gTTS output.")
-            return
-
-        new_audio = audio.speedup(playback_speed=speed_multiplier)
-        new_audio.export("output_audio.mp3", format="mp3")
-
-        # Debug: Print duration after modification
-        final_audio = AudioSegment.from_file("output_audio.mp3", format="mp3")
-        st.write(f"Final Audio Duration: {len(final_audio) / 1000} seconds")
-
-        if os.path.exists("output_audio.mp3"):
-            st.success("Speech generated successfully!")
-            st.audio("output_audio.mp3", format="audio/mp3")
+        if speed_multiplier == 1.0:
+            st.success("Speech generated successfully at normal speed!")
+            st.audio("temp_audio.mp3", format="audio/mp3")
         else:
-            st.error("Speech file was not created.")
+            new_audio = audio.speedup(playback_speed=speed_multiplier)
+            new_audio.export("output_audio.mp3", format="mp3")
+
+            # Debug: Print new duration
+            final_audio = AudioSegment.from_file("output_audio.mp3", format="mp3")
+            st.write(f"Final Audio Duration: {len(final_audio) / 1000} seconds")
+
+            st.success("Speech generated successfully with speed change!")
+            st.audio("output_audio.mp3", format="audio/mp3")
 
     except Exception as e:
         st.error(f"Error in text-to-speech conversion: {e}")
